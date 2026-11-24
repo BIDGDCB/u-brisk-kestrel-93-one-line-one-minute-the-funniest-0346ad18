@@ -15,7 +15,8 @@ ENTRY = (
 
 def main() -> None:
     assert 1 <= len(ENTRY) <= 200, f"entry is {len(ENTRY)} chars"
-    assert ENTRY.strip() == ENTRY and "\n" not in ENTRY
+    assert ENTRY.strip() == ENTRY, "entry has leading/trailing whitespace"
+    assert "\n" not in ENTRY and "\r" not in ENTRY, "entry must be a single line"
     out_dir = os.environ.get("OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(out_dir, "entry.txt"), "w", encoding="utf-8") as f:
